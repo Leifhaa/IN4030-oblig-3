@@ -42,4 +42,19 @@ If we wanna factorize e.g 532 the way we do is:
 - So the factorization is now 2*2*7*19.
 
 
+####Approach for programming the sieve
+- The sieve could be an array of boolean which represents if a number is crossed out or not.
+- The issue is that each boolean will take 32 bits, so using a 1 billion large sieve would require 32 billion bits when we only need 1
+single bit for each entry in the sieve.
+- We need to optimize this. We only need 1 bit as a flag if a number is crossed out or not
+- Instead we use a array of bytes where each bit position indicates wether the number has been crossed out or not. So if a number is crossed out, we simply set that bit to 1.
+- This requires some administration. We have special case where we start at the number 3. We also skip every second bit
+- If we want to find the bit number, So we have the calculation (nr - 3) / 2. We can also reverse this and see which value a particular bit's value is.
+- So e.g 3 is (3-3)/2 = bit position 0. 5 is (5-3)/2 = bit position 1. 7 is (7-3)/2 = bit position 2
+- If we want to find the byte number we do bo: math.floor(bitnumber/8). Remember to round down. 
+- For finding the bit number within the byte number which we found, we retrieve the remainder from the math.floor when finding byte number, and this remainder is the bit number within the particular byte which we found.
+- Using & and | operations is useful for manipulating these bits.
+- Parts of this code is already in the precode.
+
+
 
