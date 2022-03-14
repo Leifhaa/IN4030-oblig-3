@@ -61,4 +61,10 @@ single bit for each entry in the sieve.
 When paralleling the sieve, having too many synchronizations can be expensive.
 
 
+### Todo:
+document that we're making it more efficient by:
+1. Skipping even numbers
+2. Skipping by 2p
+3. Starting to read from p*p
+
 
