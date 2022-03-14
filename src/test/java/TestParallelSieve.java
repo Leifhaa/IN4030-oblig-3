@@ -25,17 +25,25 @@ public class TestParallelSieve {
         int[] paraPrimes = paraSieve.collectPrimes();
     }
 
+
     @Test
-    public void TestSeq_2billion(){
+    public void TestCompare_2billion(){
         int n = 200_000_000_0;
-        //ParallelSieve paraSieve = new ParallelSieve(n, 4);
-        //paraSieve.start();
-        //int[] paraPrimes = paraSieve.collectPrimes();
+        ParallelSieve paraSieve = new ParallelSieve(n, 4);
+        paraSieve.start();
+        int[] paraPrimes = paraSieve.collectPrimes();
 
         SieveOfEratosthenes seqSieve = new SieveOfEratosthenes(n);
         int[] seqPrimes = seqSieve.getPrimes();
 
-        //Assert.assertArrayEquals(paraPrimes, seqPrimes);
+        Assert.assertArrayEquals(paraPrimes, seqPrimes);
+    }
+
+    @Test
+    public void TestSeq_2billion(){
+        int n = 200_000_000_0;
+        SieveOfEratosthenes seqSieve = new SieveOfEratosthenes(n);
+        int[] seqPrimes = seqSieve.getPrimes();
     }
 
 
