@@ -53,21 +53,21 @@ package src;
  */
 
 
-class SieveOfEratosthenes {
+public class SieveOfEratosthenes {
 
   /**
    * Declaring all the global variables
    *
    */
-  int n, root, numOfPrimes;
-  byte[] oddNumbers;
+  public int n, root, numOfPrimes;
+  public byte[] oddNumbers;
 
 
   /**
    * Constructor that initializes the global variables
    * @param n Prime numbers up until (and including if prime) 'n' is found
    */
-  SieveOfEratosthenes(int n) {
+  public SieveOfEratosthenes(int n) {
     this.n = n;
     root = (int) Math.sqrt(n);
     oddNumbers = new byte[(n / 16) + 1];
@@ -78,7 +78,7 @@ class SieveOfEratosthenes {
    * Performs the sieve and collects the primes produced by the sieve.
    * @return An array containing all the primes up to and including 'n'.
    */
-  int[] getPrimes() {
+  public int[] getPrimes() {
     if (n <= 1) return new int[0];
 
     sieve();
@@ -184,7 +184,7 @@ class SieveOfEratosthenes {
    * Prints the primes found.
    * @param primes The array containing all the primes.
    */
-  static void printPrimes(int[] primes) {
+  public static void printPrimes(int[] primes) {
     for (int prime : primes)
       System.out.println(prime);
   }
