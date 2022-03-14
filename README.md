@@ -57,4 +57,8 @@ single bit for each entry in the sieve.
 - Parts of this code is already in the precode.
 
 
+### Synchronization of the sieve
+When paralleling the sieve, having too many synchronizations can be expensive.
+
+
 
