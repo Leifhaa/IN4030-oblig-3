@@ -18,16 +18,11 @@ public class TestParallelSieve {
     }
 
     @Test
-    public void TestMultithreadThread_2billion(){
+    public void TestPara_2billion(){
         int n = 200_000_000_0;
-        ParallelSieve paraSieve = new ParallelSieve(n, 4);
+        ParallelSieve paraSieve = new ParallelSieve(n, 8);
         paraSieve.start();
         int[] paraPrimes = paraSieve.collectPrimes();
-
-        SieveOfEratosthenes seqSieve = new SieveOfEratosthenes(n);
-        int[] seqPrimes = seqSieve.getPrimes();
-
-        Assert.assertArrayEquals(paraPrimes, seqPrimes);
     }
 
     @Test
