@@ -11,8 +11,8 @@ public class TestFactorize {
         paraSieve.start();
         int[] paraPrimes = paraSieve.collectPrimes();
 
-        Factorization factorize = new Factorization(n, n, paraPrimes);
-        factorize.factorize();
+        Factorization factorize = new Factorization(n, paraPrimes);
+        factorize.factorizeAll();
         factorize.precode.writeFactors("Sequentual");
     }
 
@@ -24,8 +24,10 @@ public class TestFactorize {
         paraSieve.start();
         int[] paraPrimes = paraSieve.collectPrimes();
 
-        Factorization factorize = new Factorization(n, n, paraPrimes);
-        factorize.factorize();
+        Factorization factorize = new Factorization(n, paraPrimes);
+        factorize.factorizeAll();
         factorize.precode.writeFactors("Sequentual");
     }
+
+
 }
