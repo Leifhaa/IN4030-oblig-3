@@ -2,6 +2,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import src.Factorization;
 import src.ParallelSieve;
+import src.SieveOfEratosthenes;
 
 public class TestFactorize {
     @Test
@@ -18,12 +19,10 @@ public class TestFactorize {
 
 
     @Test
-    public void TestFactorize200_000_000_0(){
+    public void Test_sequentialFactorize_200_000_000_0(){
         int n = 200_000_000_0;
-        ParallelSieve paraSieve = new ParallelSieve(n, 8);
-        paraSieve.start();
-        int[] paraPrimes = paraSieve.collectPrimes();
-
+        SieveOfEratosthenes sieve = new SieveOfEratosthenes(n);
+        int[] paraPrimes = sieve.getPrimes();
         Factorization factorize = new Factorization(n, paraPrimes);
         factorize.factorizeAll();
         factorize.precode.writeFactors("Sequentual");

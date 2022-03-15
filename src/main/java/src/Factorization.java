@@ -1,5 +1,7 @@
 package src;
 
+import java.util.concurrent.CyclicBarrier;
+
 public class Factorization {
     private int base;
     private int[] primes;

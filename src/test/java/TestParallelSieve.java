@@ -17,13 +17,7 @@ public class TestParallelSieve {
         Assert.assertArrayEquals(paraPrimes, seqPrimes);
     }
 
-    @Test
-    public void TestPara_2billion(){
-        int n = 200_000_000_0;
-        ParallelSieve paraSieve = new ParallelSieve(n, 8);
-        paraSieve.start();
-        int[] paraPrimes = paraSieve.collectPrimes();
-    }
+
 
     @Test
     public void TestPara_100(){
@@ -45,6 +39,22 @@ public class TestParallelSieve {
         int[] seqPrimes = seqSieve.getPrimes();
 
         Assert.assertArrayEquals(paraPrimes, seqPrimes);
+    }
+
+    @Test
+    public void TestPara_2billion(){
+        int n = 200_000_000_0;
+        ParallelSieve paraSieve = new ParallelSieve(n, 8);
+        paraSieve.start();
+        int[] paraPrimes = paraSieve.collectPrimes();
+    }
+
+    @Test
+    public void TestPara_2billion_4threads(){
+        int n = 200_000_000_0;
+        ParallelSieve paraSieve = new ParallelSieve(n, 4);
+        paraSieve.start();
+        int[] paraPrimes = paraSieve.collectPrimes();
     }
 
     @Test
