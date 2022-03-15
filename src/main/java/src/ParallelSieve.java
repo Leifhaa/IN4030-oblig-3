@@ -53,7 +53,6 @@ public class ParallelSieve {
         int[] primes = sieve.getPrimes();
         Thread[] workers = new Thread[threads];
         int readFrom = 3;
-        int startByte = m / numbersInByte;
         int readSize = n / threads;
         int cells = n / 16 + 1;
         byteArray = new byte[cells];
@@ -70,14 +69,6 @@ public class ParallelSieve {
                 readTo = n;
             }
 
-
-
-            //if (i < ((cells - startByte) % threads)){
-                /*
-                    The threads could not split evenly so this thread will read an extra element
-                 */
-            //    readTo++;
-            //}
 
             SieveWorker sw = new SieveWorker(readFrom, readTo, primes, n, byteArray);
             workers[i] = new Thread(sw);

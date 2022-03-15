@@ -35,7 +35,6 @@ public class FactorContainer {
         Oblig3Precode oblig3Precode = new Oblig3Precode(n);
         for (Map.Entry<Long, HashMap<Integer, ArrayList<Integer>>> number :
                 factorMap.entrySet()) {
-            System.out.println(number.getKey());
             long total = 0;
             for (int i = 0; i < workers; i++) {
                 for (int j = 0; j < number.getValue().get(i).size(); j++) {
@@ -48,31 +47,6 @@ public class FactorContainer {
             if (total != number.getKey()) {
                 oblig3Precode.addFactor(number.getKey(), number.getKey() / total);
             }
-
-
-            /*
-            ArrayList<Integer> tmp = number.getValue().get(0);
-            for (int i = 1; i < workers; i++) {
-                tmp.addAll(number.getValue().get(i));
-            }
-            Collections.sort(tmp);
-
-            int total = tmp.get(0);
-            for (int i = 1; i < tmp.size(); i++) {
-                total *= tmp.get(i);
-            }
-
-
-            for (Integer integer : tmp) {
-                oblig3Precode.addFactor(number.getKey(), integer);
-            }
-
-            if (total != number.getKey()) {
-                oblig3Precode.addFactor(number.getKey(), number.getKey() / total);
-            }
-
-             */
-
         }
         oblig3Precode.writeFactors("Paralell");
         return oblig3Precode;
