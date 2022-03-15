@@ -18,6 +18,9 @@ public class FactorContainer {
         factorMap = new HashMap<>();
         for (long i = readTo - 1; i >= readFrom; i--) {
             factorMap.put(i, new HashMap<>());
+            for (int j = 0; j < workers; j++){
+                registerWorker(i, j);
+            }
         }
     }
 
@@ -28,7 +31,13 @@ public class FactorContainer {
 
     public void addFactor(long number, int workerId, int prime) {
         HashMap<Integer, ArrayList<Integer>> map = factorMap.get(number);
-        map.get(workerId).add(prime);
+        try {
+            map.get(workerId).add(prime);
+        }
+        catch (Exception e){
+            System.out.println("Exception");
+
+        }
     }
 
     public Oblig3Precode getResults(int n) {

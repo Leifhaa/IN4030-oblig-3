@@ -24,8 +24,6 @@ public class FactorizeWorker implements Runnable {
     @Override
     public void run() {
         for (int i = 1; i < nFactorizations + 1; i++){
-            long numberToFactorize = base - i;
-            factorContainer.registerWorker(numberToFactorize, id);
             factorize(base - i);
         }
     }
