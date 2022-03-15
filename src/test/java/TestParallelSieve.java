@@ -25,6 +25,14 @@ public class TestParallelSieve {
         int[] paraPrimes = paraSieve.collectPrimes();
     }
 
+    @Test
+    public void TestPara_100(){
+        int n = 85;
+        ParallelSieve paraSieve = new ParallelSieve(n, 8);
+        paraSieve.start();
+        int[] paraPrimes = paraSieve.collectPrimes();
+    }
+
 
     @Test
     public void TestCompare_2billion(){
