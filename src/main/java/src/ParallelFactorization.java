@@ -1,8 +1,5 @@
 package src;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.TreeMap;
 import java.util.concurrent.CyclicBarrier;
 
 public class ParallelFactorization {
@@ -13,8 +10,7 @@ public class ParallelFactorization {
     private Thread[] threads;
     private FactorizeWorker[] workers;
     private ParallelSieve parallelSieve;
-    private HashMap<Long, HashMap<Integer, ArrayList<Integer>>> factorMap;
-    final CyclicBarrier barrierThreads;
+    private FactorContainer factorContainer;
     private int nFactorizations = 100;
 
 
@@ -23,11 +19,7 @@ public class ParallelFactorization {
         this.base = (long)n * n;
         this.threadCount = threadCount;
         this.parallelSieve = new ParallelSieve(n, threadCount);
-        factorMap = new HashMap<>(nFactorizations);
-        for (int i = 1; i < nFactorizations; i++) {
-            factorMap.put(base - i, new HashMap<>());
-        }
-        barrierThreads = new CyclicBarrier(threadCount);
+        this.factorContainer = new FactorContainer(base - nFactorizations, base, threadCount);
     }
 
 
@@ -37,11 +29,14 @@ public class ParallelFactorization {
         createThreads();
         startThreads();
 
-        try {
-            barrierThreads.await();
-        } catch (Exception e) {
-
+        for (int i = 0; i < threadCount; i++) {
+            try {
+                threads[i].join();
+            } catch (Exception e) {
+                System.out.println("Exception : " + e);
+            }
         }
+        Oblig3Precode res = factorContainer.getResults(n);
     }
 
 
@@ -53,15 +48,6 @@ public class ParallelFactorization {
         threads = new Thread[threadCount];
         for (int i = 0; i < threadCount; i++) {
             createThread(i);
-            /*
-            if (i < primes.length % threadCount){
-                //Has to read one extra prime as they don't divide perfectly
-                createThread(primesPerThread + 1, i);
-            }
-            else{
-            }
-
-             */
         }
     }
 
@@ -73,7 +59,7 @@ public class ParallelFactorization {
 
 
     private void createThread(int i) {
-        FactorizeWorker worker = new FactorizeWorker(i, n, threadCount, primes, factorMap, nFactorizations);
+        FactorizeWorker worker = new FactorizeWorker(i, n, threadCount, primes, factorContainer, nFactorizations);
         workers[i] = worker;
         Thread t = new Thread(worker);
         threads[i] = t;

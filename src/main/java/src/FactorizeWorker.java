@@ -1,9 +1,5 @@
 package src;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-
 public class FactorizeWorker implements Runnable {
 
     private int id;
@@ -13,23 +9,23 @@ public class FactorizeWorker implements Runnable {
      * Primes which is used in factorization for this worker.
      */
     public int[] primes;
-    private HashMap<Long, HashMap<Integer, ArrayList<Integer>>> factorMap;
+    private FactorContainer factorContainer;
     private int nFactorizations;
 
-    public FactorizeWorker(int id, int n, int threadCount, int[] primes, HashMap<Long, HashMap<Integer, ArrayList<Integer>>> factorMap, int nFactorizations) {
+    public FactorizeWorker(int id, int n, int threadCount, int[] primes, FactorContainer factorMap, int nFactorizations) {
         this.id = id;
         this.base = (long)n * n;
         this.threadCount = threadCount;
         this.primes = primes;
-        this.factorMap = factorMap;
+        this.factorContainer = factorMap;
         this.nFactorizations = nFactorizations;
     }
 
     @Override
     public void run() {
-        for (int i = 1; i < nFactorizations; i++){
+        for (int i = 1; i < nFactorizations + 1; i++){
             long numberToFactorize = base - i;
-            factorMap.get(numberToFactorize).put(id, new ArrayList<>());
+            factorContainer.registerWorker(numberToFactorize, id);
             factorize(base - i);
         }
     }
@@ -42,16 +38,12 @@ public class FactorizeWorker implements Runnable {
                 break;
             }
             else if (rest % primes[i] == 0){
-                addFactor(number, primes[i]);
+                factorContainer.addFactor(number, id, primes[i]);
                 rest = rest / primes[i];
             }
             else{
                 i += threadCount;
             }
         }
-    }
-
-    private void addFactor(long number, int prime){
-        factorMap.get(number).get(id).add(prime);
     }
 }
