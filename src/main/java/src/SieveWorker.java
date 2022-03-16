@@ -19,7 +19,6 @@ public class SieveWorker implements Runnable {
 
     @Override
     public void run() {
-        long seq_sieve_start = System.nanoTime();
         for (int i = 1; i < primes.length; i++) {
             if (primes[i] > root) {
                 break;
@@ -27,8 +26,6 @@ public class SieveWorker implements Runnable {
             //Cross out based on pre-known primes
             traverse(primes[i]);
         }
-        double seq_sieve_total = (double) (System.nanoTime() - seq_sieve_start) / 1000000;
-        System.out.println("Traverings took: " + seq_sieve_total);
 
     }
 
@@ -44,10 +41,4 @@ public class SieveWorker implements Runnable {
         int byteIndex = num / 16;
         byteArray[byteIndex] |= (1 << bitIndex);
     }
-
-
-
-
-
-
 }

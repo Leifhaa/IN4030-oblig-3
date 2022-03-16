@@ -57,16 +57,32 @@ public class Main {
         }
 
         if (mode == 0) {
+            long start = System.nanoTime();
             SieveOfEratosthenes sieve = new SieveOfEratosthenes(n);
             int[] paraPrimes = sieve.getPrimes();
             Factorization factorize = new Factorization(n, paraPrimes);
             factorize.factorizeAll();
             factorize.precode.writeFactors("Sequentual");
+            double end = (double) (System.nanoTime() - start) / 1000000;
+            System.out.println("Finished in: " + end + "ms");
         }
         else if (mode == 1){
-            ParallelFactorization para = new ParallelFactorization(n, threads);
+            long start = System.nanoTime();
+            ParallelSieve sieve = new ParallelSieve(n, threads);
+            sieve.start();
+            int[] primes = sieve.collectPrimes();
+            ParallelFactorization para = new ParallelFactorization(n, threads, primes);
             para.factorizeAll();
+            double end = (double) (System.nanoTime() - start) / 1000000;
+            System.out.println("Finished in: " + end + "ms");
         }
+        else if (mode == 2){
+            runBenchmarks(n, threads);
+        }
+    }
+
+    private static void runBenchmarks(int n, int threads){
+
     }
 
 

@@ -40,7 +40,7 @@ public class FactorContainer {
         }
     }
 
-    public Oblig3Precode getResults(int n) {
+    public void saveResults(int n) {
         Oblig3Precode oblig3Precode = new Oblig3Precode(n);
         for (Map.Entry<Long, HashMap<Integer, ArrayList<Integer>>> number :
                 factorMap.entrySet()) {
@@ -57,7 +57,6 @@ public class FactorContainer {
                 oblig3Precode.addFactor(number.getKey(), number.getKey() / total);
             }
         }
-        oblig3Precode.writeFactors("Paralell");
-        return oblig3Precode;
+        oblig3Precode.writeFactors("Parallel");
     }
 }

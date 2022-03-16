@@ -1,7 +1,5 @@
 package src;
 
-import java.util.concurrent.CyclicBarrier;
-
 public class ParallelFactorization {
     private int n;
     private final long base;
@@ -9,23 +7,20 @@ public class ParallelFactorization {
     private int[] primes;
     private Thread[] threads;
     private FactorizeWorker[] workers;
-    private ParallelSieve parallelSieve;
     private FactorContainer factorContainer;
     private int nFactorizations = 100;
 
 
-    public ParallelFactorization(int n, int threadCount) {
+    public ParallelFactorization(int n, int threadCount, int[] primes) {
         this.n = n;
         this.base = (long)n * n;
         this.threadCount = threadCount;
-        this.parallelSieve = new ParallelSieve(n, threadCount);
+        this.primes = primes;
         this.factorContainer = new FactorContainer(base - nFactorizations, base, threadCount);
     }
 
 
     public void factorizeAll() {
-        parallelSieve.start();
-        primes = parallelSieve.collectPrimes();
         createThreads();
         startThreads();
 
@@ -36,7 +31,7 @@ public class ParallelFactorization {
                 System.out.println("Exception : " + e);
             }
         }
-        Oblig3Precode res = factorContainer.getResults(n);
+        factorContainer.saveResults(n);
     }
 
 

@@ -49,16 +49,12 @@ public class ParallelSieve {
 
 
     public void start(){
-        long seq_sieve_start = System.nanoTime();
         int[] primes = sieve.getPrimes();
         Thread[] workers = new Thread[threads];
         int readFrom = 3;
         int readSize = n / threads;
         int cells = n / 16 + 1;
         byteArray = new byte[cells];
-        double seq_sieve_total = (double) (System.nanoTime() - seq_sieve_start) / 1000000;
-
-        System.out.println("Seq sieve took:" + seq_sieve_total);
 
 
         for (int i = 0; i < threads; i++){
@@ -78,7 +74,6 @@ public class ParallelSieve {
         }
         for (int i = 0; i < this.threads; i++) {
             try { workers[i].join();
-                System.out.println("Thread " + i + "Finished!");
             } catch (InterruptedException e) {}
         }
     }
