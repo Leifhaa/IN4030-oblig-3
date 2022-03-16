@@ -134,7 +134,7 @@ algorithm almost runs twice the speed due to running multithreaded. For smaller 
 We can also see that the parallel sieve does complete at 9401.941 which is below the requirement of the sieve completing in 30 seconds.
 
 Over to the factorization part, we can see that the speedup actually decreases as n becomes larger. I was expecting the speedup to also increase as n increased for this algorithm, however the opposite occurred. I believe this occurs as
-the sequential algorithm performs quite fast (1036.304 for 2 billion) and is able to break earlier if it recognizes that it's completed. For the parallel algorithm however, it's not able to do the same which influences that it's slower as n increases.
+the sequential algorithm performs quite fast (1036.304 for 2 billion) and is able to stop earlier if it recognizes that it's completed. For the parallel algorithm however, it's not able to do the same which influences that it's slower as n increases.
 It is however able to complete in around 9.4 seconds, or a total of 18030.864 for parallel sieve + parallel factorization which is below the requirement of 60 seconds. Due to this, I don't believe there's an bug in the algorithm, but simply that the sequential algorithm has internal code where it's able to conclude that it's finished earlier (only possible when running sequential)
 
 
