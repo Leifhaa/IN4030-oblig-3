@@ -47,6 +47,7 @@ had to mark all numbers from 0 to p (green line) and then collect the primes (nu
 
 
 ![alt text](docs/images/sieve-threads.png)
+
 2. Now that I had primes from 0 to m (in red), I could start marking the numbers from 0 to n. In order to parallelize it, I decided to split 0 to n so each thread only calculates for a certain portion. Since we're using bytearrays for splitting and skipping even numbers,
 it's important that we split so each thread doesn't start at the middle of a byte, but rather starts at the following 16th byte.
 
