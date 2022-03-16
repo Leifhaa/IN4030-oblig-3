@@ -140,7 +140,7 @@ It is however able to complete in around 9.4 seconds, or a total of 18030.864 fo
 
 ### 7. Conclusion – just a short summary of what you have achieved
 We can see that parallelling the sieve does give a speedup, especially once n becomes larger.
-Paralleling the factorization however did not give a speedup for my algorithms. As a result, the algorithms performs at about the same rate. Sequential factorization is faster in my tests and parallel is faster in my tests.
+Paralleling the factorization however did not give a speedup for my algorithms. As a result, the algorithms performs at about the same rate. Sequential factorization is faster in my tests and parallel sieve is faster in my tests.
 
 
 
