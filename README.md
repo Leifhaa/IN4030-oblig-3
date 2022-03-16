@@ -1,4 +1,63 @@
-"# IN4030-oblig-3" 
+# IN4030 - Oblig 3
+## 1. Introduction – what this report is about.
+This report is about the oblig 3 in the UiO coarse IN4030 (Efficient parallel programming). In this report I'm solving the process of finding large prime numbers & factorizing large numbers.
+It demonstrates of using the Sieve of Eratosthenes and paralellization can make this process more efficient.
+
+## 2. User guide – how to run your program (short, but essential), include a very simple example.
+The program can be run using the command:
+```
+java -cp target/IN4030-oblig-3-1.0-SNAPSHOT.jar src.Main <n> <t> <m>
+```
+- n - Program will generate all primes up to up and factorize the 100 largest numbers less than n*n
+- t - How many threads to use. if zero then the program uses the number of cores on the machine
+- m - Which mode to use. Can be the following:
+    - 0: runs the program sequentially
+    - 1: runs the program in parallel
+    - 2: runs benchmarks and prints these times
+    - 3: runs tests
+    
+Example usage for running sequentially for 20000000:
+```
+java -cp target/IN4030-oblig-3-1.0-SNAPSHOT.jar src.Main 20000000 0 0
+```
+
+Example usage for running parallel for 20000000 with 4 threads:
+```
+java -cp target/IN4030-oblig-3-1.0-SNAPSHOT.jar src.Main 20000000 4 1
+```
+
+Example usage for running benchmarks:
+```
+java -cp target/IN4030-oblig-3-1.0-SNAPSHOT.jar src.Main 20000000 0 2
+```
+
+Example usage for running tests:
+```
+java -cp target/IN4030-oblig-3-1.0-SNAPSHOT.jar src.Main 20000000 0 3
+```
+
+### Parallel Sieve of Eratosthenes – how you did the parallelization – consider including drawings.
+Given that the number n should be factorized.
+![alt text](docs/images/sieve-parallel.png)
+1. First I used the sequential sieve to obtain all prime numbers up to m (red line). In order to obtain these numbers, the sequential sieve
+had to mark all numbers from 0 to p and then collect the primes (numbers which was not marked). This sequential part is relatively fast as it's only iterating double square root of n. The iteration is also skipping:
+    - Skipping even numbers
+    - Skipping by 2p
+    - Starting to read from p*p
+
+
+![alt text](docs/images/sieve-threads.png)
+2. Now that I had primes from 0 to m (in red), I could start marking the numbers from 0 to n. In order to parallelize it, I decided to split 0 to n so each thread only calculates for a certain portion. Since we're using bytearrays for splitting and skipping even numbers,
+it's important that we split so each thread doesn't start at the middle of a byte, but rather starts at the following 16th byte.
+
+![alt text](docs/images/sieve-process.png)
+3. Now that we've marked all numbers from 0-n, we have a bitarray of marked numbers (numbers which is not prime numbers). All we have to do at the end is sequentially convert this bitarray to an array of integer with prime numbers from 0-n
+
+
+
+
+
+
 
 
 
@@ -125,8 +184,6 @@ The benchmarks are set to report the average time usage
 
 ### Todo:
 document that we're making it more efficient by:
-1. Skipping even numbers
-2. Skipping by 2p
-3. Starting to read from p*p
+
 
 
