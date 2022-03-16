@@ -104,7 +104,6 @@ Note: Time in in milliseconds
 |200000000|903.154      |553.767    |1.630   |
 |2000000000|13447.481   |7862.125   |1.710   |
 
-Chart:
 ![alt text](docs/speedup-sieve.png)
 
 
@@ -117,7 +116,6 @@ Chart:
 |2000000000|1036.304   |9401.941   |0.110   |
 
 
-Chart:
 ![alt text](docs/images/speedup-factorization.png)
 
 
