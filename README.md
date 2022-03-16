@@ -128,55 +128,55 @@ Paralleling the factorization however did not give a speedup for my algorithms. 
 
 
 ### 8. Appendix – the output of your program.
-Here is an example of output which outputs when running benchmark's:
-Running benchmarks. This can take a while, please wait...
-Starting benchmarking sieves...
-Sequential Sieve used median time 9.1063ms for n = 2000000
-Parallel Sieve used median time 7.973ms for n = 2000000
-Speedup: 1.1421422300263389
-Sequential Sieve used median time 73.8185ms for n = 20000000
-Parallel Sieve used median time 65.9596ms for n = 20000000
-Speedup: 1.119147174937386
-Sequential Sieve used median time 969.9284ms for n = 200000000
-Parallel Sieve used median time 556.3265ms for n = 200000000
-Speedup: 1.74345173203146
-Sequential Sieve used median time 13854.7897ms for n = 2000000000
-Parallel Sieve used median time 11244.9455ms for n = 2000000000
-Speedup: 1.2320904267610724
-Finished benchmarking sieves...
---------------------------------
-Starting benchmarking factorization...
-Sequential Factorization used median time 7.9705ms for n = 2000000
-Paralell Factorization used median time 12.4736ms for n = 2000000
-Speedup: 0.6389895459209852
-Sequential Factorization used median time 33.9302ms for n = 20000000
-Paralell Factorization used median time 95.321ms for n = 20000000
-Speedup: 0.35595723922325617
-Sequential Factorization used median time 254.0066ms for n = 200000000
-Paralell Factorization used median time 1066.6903ms for n = 200000000
-Speedup: 0.23812591152277282
-Sequential Factorization used median time 1072.6763ms for n = 2000000000
-Paralell Factorization used median time 8425.6287ms for n = 2000000000
-Speedup: 0.12731112872324887
-Finished benchmarking factorization...
---------------------------------
-Starting benchmarking sieve + factorization...
-Sequential sieve + factorization used median time 17.9441ms for n = 2000000
-Parallel sieve + factorization used median time 21.7546ms for n = 2000000
-Speedup: 0.8248416426870638
-Sequential sieve + factorization used median time 121.1307ms for n = 20000000
-Parallel sieve + factorization used median time 178.5425ms for n = 20000000
-Speedup: 0.6784418275760674
-Sequential sieve + factorization used median time 1284.4311ms for n = 200000000
-Parallel sieve + factorization used median time 1590.0737ms for n = 200000000
-Speedup: 0.8077808594658223
-Sequential sieve + factorization used median time 14573.8955ms for n = 2000000000
-Parallel sieve + factorization used median time 19010.3113ms for n = 2000000000
-Speedup: 0.7666310808913476
-Finished benchmarking sieve + factorization
---------------------------------
-
-Process finished with exit code 0
+Here is an example of output which outputs when running benchmark's: 
+Running benchmarks. This can take a while, please wait... 
+Starting benchmarking sieves... 
+Sequential Sieve used median time 9.1063ms for n = 2000000 
+Parallel Sieve used median time 7.973ms for n = 2000000 
+Speedup: 1.1421422300263389 
+Sequential Sieve used median time 73.8185ms for n = 20000000 
+Parallel Sieve used median time 65.9596ms for n = 20000000 
+Speedup: 1.119147174937386 
+Sequential Sieve used median time 969.9284ms for n = 200000000 
+Parallel Sieve used median time 556.3265ms for n = 200000000 
+Speedup: 1.74345173203146 
+Sequential Sieve used median time 13854.7897ms for n = 2000000000 
+Parallel Sieve used median time 11244.9455ms for n = 2000000000 
+Speedup: 1.2320904267610724 
+Finished benchmarking sieves... 
+-------------------------------- 
+Starting benchmarking factorization... 
+Sequential Factorization used median time 7.9705ms for n = 2000000 
+Paralell Factorization used median time 12.4736ms for n = 2000000 
+Speedup: 0.6389895459209852 
+Sequential Factorization used median time 33.9302ms for n = 20000000 
+Paralell Factorization used median time 95.321ms for n = 20000000 
+Speedup: 0.35595723922325617 
+Sequential Factorization used median time 254.0066ms for n = 200000000 
+Paralell Factorization used median time 1066.6903ms for n = 200000000 
+Speedup: 0.23812591152277282 
+Sequential Factorization used median time 1072.6763ms for n = 2000000000 
+Paralell Factorization used median time 8425.6287ms for n = 2000000000 
+Speedup: 0.12731112872324887 
+Finished benchmarking factorization... 
+-------------------------------- 
+Starting benchmarking sieve + factorization... 
+Sequential sieve + factorization used median time 17.9441ms for n = 2000000 
+Parallel sieve + factorization used median time 21.7546ms for n = 2000000 
+Speedup: 0.8248416426870638 
+Sequential sieve + factorization used median time 121.1307ms for n = 20000000 
+Parallel sieve + factorization used median time 178.5425ms for n = 20000000 
+Speedup: 0.6784418275760674 
+Sequential sieve + factorization used median time 1284.4311ms for n = 200000000 
+Parallel sieve + factorization used median time 1590.0737ms for n = 200000000 
+Speedup: 0.8077808594658223 
+Sequential sieve + factorization used median time 14573.8955ms for n = 2000000000 
+Parallel sieve + factorization used median time 19010.3113ms for n = 2000000000 
+Speedup: 0.7666310808913476 
+Finished benchmarking sieve + factorization 
+-------------------------------- 
+ 
+Process finished with exit code 0 
 
 
 ### Java measurement harness
