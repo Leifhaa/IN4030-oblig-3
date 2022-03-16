@@ -187,7 +187,7 @@ public class Main {
             seqTimes[i] = (System.nanoTime() - time) / 1000000.0;
         }
         double seqMedian = seqTimes[(seqTimes.length) / 2];
-        System.out.println("Sequential sieve + factorization used median time " + seqMedian + " for n = " + testNumber);
+        System.out.println("Sequential sieve + factorization used median time " + seqMedian + "ms for n = " + testNumber);
 
         double[] paraTimes = new double[totalRuns];
         for (int i = 0; i < totalRuns; i++) {
@@ -198,7 +198,7 @@ public class Main {
         }
 
         double paraMedian = paraTimes[(paraTimes.length) / 2];
-        System.out.println("Parallel sieve + factorization used median time " + paraMedian + " for n = " + testNumber);
+        System.out.println("Parallel sieve + factorization used median time " + paraMedian + "ms for n = " + testNumber);
         System.out.println("Speedup: " + seqMedian / paraMedian);
     }
 
@@ -213,7 +213,7 @@ public class Main {
             seqFac[i] = (System.nanoTime() - time) / 1000000.0;
         }
         double seqMedian = seqFac[(seqFac.length) / 2];
-        System.out.println("Sequential Factorization used median time " + seqMedian + " for n = " + testNumber);
+        System.out.println("Sequential Factorization used median time " + seqMedian + "ms for n = " + testNumber);
 
 
         double[] paraFac = new double[totalRuns];
@@ -223,7 +223,7 @@ public class Main {
             paraFac[i] = (System.nanoTime() - time) / 1000000.0;
         }
         double parMedian = paraFac[(paraFac.length) / 2];
-        System.out.println("Paralell Factorization used median time " + parMedian + " for n = " + testNumber);
+        System.out.println("Paralell Factorization used median time " + parMedian + "ms for n = " + testNumber);
         System.out.println("Speedup: " + seqMedian / parMedian);
     }
 
@@ -238,7 +238,7 @@ public class Main {
             seqSieve[i] = (System.nanoTime() - time) / 1000000.0;
         }
         double seqMedian = seqSieve[(seqSieve.length) / 2];
-        System.out.println("Sequential Sieve used median time " + seqMedian + " for n = " + testNumber);
+        System.out.println("Sequential Sieve used median time " + seqMedian + "ms for n = " + testNumber);
 
 
         double[] parSieve = new double[totalRuns];
@@ -248,7 +248,7 @@ public class Main {
             parSieve[i] = (System.nanoTime() - time) / 1000000.0;
         }
         double parMedian = parSieve[(seqSieve.length) / 2];
-        System.out.println("Parallel Sieve used median time " + parMedian + " for n = " + testNumber);
+        System.out.println("Parallel Sieve used median time " + parMedian + "ms for n = " + testNumber);
         System.out.println("Speedup: " + seqMedian / parMedian);
     }
 
