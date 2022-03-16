@@ -80,7 +80,7 @@ it's important that we split so each thread doesn't start at the middle of a byt
 #### 3:
    ![alt text](docs/images/factorization-process.png)
 
-After all threads were finished, they had a local array of factors which they would. The last thing we have to do is to merge these arrays and add the remainder if there is any. Then we have the complete factorization and are finished.
+After all threads were finished, they had a local array of factors. The final thing we have to do is to merge these arrays and add the remainder if there is any. Then we have the complete factorization and are finished.
 
 
 ### 5. Implementation – a somewhat detailed description of how your Java program works & how tested.
