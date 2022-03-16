@@ -126,24 +126,24 @@ public class Main {
         System.out.println("Tests ran successfully!");
     }
 
-    private static void runParallelFactorization(int n, int threads, int[] primes) {
+    public static void runParallelFactorization(int n, int threads, int[] primes) {
         ParallelFactorization para = new ParallelFactorization(n, threads, primes);
         para.factorizeAll();
     }
 
-    private static int[] runParallelSievve(int n, int threads) {
+    public static int[] runParallelSievve(int n, int threads) {
         ParallelSieve sieve = new ParallelSieve(n, threads);
         sieve.start();
         return sieve.collectPrimes();
     }
 
-    private static void runSequentialFactorization(int n, int[] paraPrimes) {
+    public static void runSequentialFactorization(int n, int[] paraPrimes) {
         Factorization factorize = new Factorization(n, paraPrimes);
         factorize.factorizeAll();
         factorize.precode.writeFactors("Sequentual");
     }
 
-    private static int[] runSequentialSieve(int n) {
+    public static int[] runSequentialSieve(int n) {
         SieveOfEratosthenes sieve = new SieveOfEratosthenes(n);
         int[] paraPrimes = sieve.getPrimes();
         return paraPrimes;

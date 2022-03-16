@@ -61,6 +61,68 @@ single bit for each entry in the sieve.
 When paralleling the sieve, having too many synchronizations can be expensive.
 
 
+
+### Java measurement harness
+### How to run Java Measurement harness
+Run the command
+```
+java -jar target/benchmarks.jar
+```
+
+### Details about the procude of running
+The measurement begins with warming up in order to make sure that:
+- Program is in memory/cache
+- JIT has done it's optimizations
+- The data has been read from disk
+- The data has been through memory/cache
+
+It warms up once. After this, it runs 3 iterations of the benchmarks and collects the results of these runs. We can see the results as following for n=200_000_000:
+#### Sequential sieve + factorization
+```
+Iteration   1: 1.271 s/op
+Iteration   2: 1.339 s/op
+Iteration   3: 1.252 s/op
+
+
+Result "src.JbhBenchmarks.testSequential":
+  1.287 ±(99.9%) 0.832 s/op [Average]
+  (min, avg, max) = (1.252, 1.287, 1.339), stdev = 0.046
+  CI (99.9%): [0.455, 2.119] (assumes normal distribution)
+
+```
+#### Parallel sieve + factorization
+```
+Iteration   1: 1.165 s/op
+Iteration   2: 1.185 s/op
+Iteration   3: 1.180 s/op
+
+
+Result "src.JbhBenchmarks.testParallel":
+  1.177 ±(99.9%) 0.185 s/op [Average]
+  (min, avg, max) = (1.165, 1.177, 1.185), stdev = 0.010
+  CI (99.9%): [0.992, 1.362] (assumes normal distribution)
+```
+
+#### Comparison
+```
+Benchmark                     Mode  Cnt  Score   Error  Units
+JbhBenchmarks.testParallel    avgt    3  1.177 ± 0.185   s/op
+JbhBenchmarks.testSequential  avgt    3  1.287 ± 0.832   s/op
+```
+From the benchmarks we can see that we can run the sequential procedure around 1.287 per second the parallel procedure 1.177 per second.
+We can also see that we've achieved a speedup of around 1.10 by running it parallel. We concluded these results by seeing the time it took on average running a total of 3 runs for each
+parallel and sequential. Due to the warmup, I believe the variance for each run is lower between each run. We can also see from the results that there is not much variance between each run. As there's
+not much variance, using the average time seems like a good fit. We could potentially run the methods more than 3 times, but for this benchmarking I thought it was sufficient. As a summary, the results can be used
+to argue that paralleling this procedue for such number n does improve the speed of the algorithm.
+
+
+
+
+The benchmarks are set to report the average time usage
+
+
+
+
 ### Todo:
 document that we're making it more efficient by:
 1. Skipping even numbers
