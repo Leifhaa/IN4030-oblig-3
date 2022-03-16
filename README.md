@@ -38,7 +38,7 @@ java -cp target/IN4030-oblig-3-1.0-SNAPSHOT.jar src.Main 20000000 0 3
 
 ### Parallel Sieve of Eratosthenes – how you did the parallelization – consider including drawings.
 Given that the number n should be factorized.
-####1:
+#### 1:
 ![alt text](docs/images/sieve-parallel.png)
  First I used the sequential sieve to obtain all prime numbers up to m (red line). In order to obtain these numbers, the sequential sieve
 had to mark all numbers from 0 to p (green line) and then collect the primes (numbers which was not marked). This sequential part is relatively fast as it's only iterating double square root of n. The iteration is also skipping:
@@ -47,13 +47,13 @@ had to mark all numbers from 0 to p (green line) and then collect the primes (nu
     - Starting to read from p*p
 
 
-####2:
+#### 2:
 ![alt text](docs/images/sieve-threads.png)
 
 Now that I had primes from 0 to m (in red), I could start marking the numbers from 0 to n (black line). In order to parallelize it, I decided to split 0 to n so each thread only calculates for a certain portion. Since we're using bytearrays for splitting and skipping even numbers,
 it's important that we split so each thread doesn't start at the middle of a byte, but rather starts at the following 16th byte.
 
-####3:
+#### 3:
 ![alt text](docs/images/sieve-process.png)
  Now that we've marked all numbers from 0-n, we have a bitarray of marked numbers (numbers which is not prime numbers). All we have to do at the end is sequentially convert this bitarray to an array of integer with prime numbers from 0-n
 
