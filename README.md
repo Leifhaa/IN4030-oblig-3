@@ -43,9 +43,9 @@ Given that the number n should be factorized.
 
  First I used the sequential sieve to obtain all prime numbers up to m (red line). In order to obtain these numbers, the sequential sieve
 had to mark all numbers from 0 to p (green line) and then collect the primes (numbers which was not marked). This sequential part is relatively fast as it's only iterating double square root of n. The iteration is also skipping:
-    - Skipping even numbers
-    - Skipping by 2p
-    - Starting to read from p*p
+ - Skipping even numbers
+-  Skipping by 2p
+ - Starting to read from p*p
 
 
 #### 2:
