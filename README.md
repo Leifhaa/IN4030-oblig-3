@@ -1,7 +1,7 @@
 # IN4030 - Oblig 3
 ## 1. Introduction – what this report is about.
 This report is about the oblig 3 in the UiO coarse IN4030 (Efficient parallel programming). In this report I'm solving the process of finding large prime numbers & factorizing large numbers.
-It demonstrates of using the Sieve of Eratosthenes and paralellization can make this process more efficient.
+It demonstrates the usage of Sieve of Eratosthenes and how paralellization can make this process more efficient.
 
 ## 2. User guide – how to run your program (short, but essential), include a very simple example.
 The program can be run using the command:
