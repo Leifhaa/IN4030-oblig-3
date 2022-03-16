@@ -257,10 +257,10 @@ The benchmarks are set to report the average time usage
 
 
 ## How does factorizationa nd Sieve of Sieve of Eratosthenes work? (Not neccesairy to read for examiner)
-###Prime number
+### Prime number
 A prime number is a whole number which is only dividable by itself and 1
 
-####Finding prime numbers using Sieve of Eratosthenes?
+#### Finding prime numbers using Sieve of Eratosthenes?
 Given the numbers 1-17
 - We ignore 1 (x)
 - Second number is 2, we underline it. It's a prime
@@ -272,7 +272,7 @@ Given the numbers 1-17
 - We can do the stepping by starting looking at numbers from p*p (e.g for 3 we start at 9, or for 7 we start at 49)
 - If we're stepping forward with 3 we hit an odd number each 2 time (3, 6(odd), 9, 12(odd)) so we can skip jump by 6 all the time (2*p)
 
-###Factorization
+### Factorization
 Any number higher than 1 is possible to factorise as a product of prime numbers
 N = p1 * p2 * p3 * px.
 E.g 4 = 2*2 (2 is a prime number)
@@ -280,7 +280,7 @@ E.g 6 = 3*2 (3 and 2 is prime number)
 If you ignore the order of the factorised numbers, there's only one possible combination (so 6 can be factorised as 3*2 or 2*3 but if you ignore the order they are the same). In this submission we order them from highest to lowest
 If there's only one number in this factorization, the number itself is a prime number.
 
-####Finding factorization number
+#### Finding factorization number
 If we wanna factorize e.g 532 the way we do is:
 - Start taking numbers from the sieve, starting with 2
 - Try divide that into 532: 532/2 = 266. So current factorization is 2
