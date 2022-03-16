@@ -10,6 +10,7 @@ import java.util.Map;
  */
 public class FactorContainer {
     private HashMap<Long, HashMap<Integer, ArrayList<Integer>>> factorMap;
+    public HashMap<Long, Long> rests = new HashMap<>();
     private int workers;
 
 
@@ -18,7 +19,8 @@ public class FactorContainer {
         factorMap = new HashMap<>();
         for (long i = readTo - 1; i >= readFrom; i--) {
             factorMap.put(i, new HashMap<>());
-            for (int j = 0; j < workers; j++){
+            rests.put(i, i);
+            for (int j = 0; j < workers; j++) {
                 registerWorker(i, j);
             }
         }
@@ -29,15 +31,10 @@ public class FactorContainer {
         map.put(workerId, new ArrayList<>());
     }
 
-    public void addFactor(long number, int workerId, int prime) {
+    public synchronized void addFactor(long number, int workerId, int prime) {
         HashMap<Integer, ArrayList<Integer>> map = factorMap.get(number);
-        try {
-            map.get(workerId).add(prime);
-        }
-        catch (Exception e){
-            System.out.println("Exception");
-
-        }
+        map.get(workerId).add(prime);
+        rests.put(number, rests.get(number) / prime);
     }
 
     public void saveResults(int n) {

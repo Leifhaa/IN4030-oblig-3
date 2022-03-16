@@ -23,7 +23,6 @@ public class ParallelFactorization {
     public void factorizeAll() {
         createThreads();
         startThreads();
-
         for (int i = 0; i < threadCount; i++) {
             try {
                 threads[i].join();
@@ -54,7 +53,7 @@ public class ParallelFactorization {
 
 
     private void createThread(int i) {
-        FactorizeWorker worker = new FactorizeWorker(i, n, threadCount, primes, factorContainer, nFactorizations);
+        FactorizeWorker worker = new FactorizeWorker(i, base, threadCount, primes, factorContainer, nFactorizations);
         workers[i] = worker;
         Thread t = new Thread(worker);
         threads[i] = t;

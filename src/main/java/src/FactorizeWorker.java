@@ -12,9 +12,9 @@ public class FactorizeWorker implements Runnable {
     private FactorContainer factorContainer;
     private int nFactorizations;
 
-    public FactorizeWorker(int id, int n, int threadCount, int[] primes, FactorContainer factorMap, int nFactorizations) {
+    public FactorizeWorker(int id, long base, int threadCount, int[] primes, FactorContainer factorMap, int nFactorizations) {
         this.id = id;
-        this.base = (long)n * n;
+        this.base = base;
         this.threadCount = threadCount;
         this.primes = primes;
         this.factorContainer = factorMap;
@@ -29,15 +29,13 @@ public class FactorizeWorker implements Runnable {
     }
 
     private void factorize(long number){
-        long rest = number;
-        for (int i = id; i < primes.length || rest == 0;){
-            if (Math.pow(primes[i], 2) > rest){
+        for (int i = id; i < primes.length || factorContainer.rests.get(number) == 0;){
+            if (Math.pow(primes[i], 2) > factorContainer.rests.get(number)){
                 //Completed
                 break;
             }
-            else if (rest % primes[i] == 0){
+            else if (factorContainer.rests.get(number) % primes[i] == 0){
                 factorContainer.addFactor(number, id, primes[i]);
-                rest = rest / primes[i];
             }
             else{
                 i += threadCount;

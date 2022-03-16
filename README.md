@@ -99,10 +99,10 @@ Note: Time in in milliseconds
 #### Sieve:
 | n     | Sequential    | Parallel  | Speedup|
 |-------|---------------|-----------|--------|
-|2000000|7.9108         |7.4203     |1.066   |
-|20000000|76.587        |68.110     |1.124   |
-|200000000|903.154      |553.767    |1.630   |
-|2000000000|13447.481   |7862.125   |1.710   |
+|2000000|7.872         |9.917     |0.793   |
+|20000000|70.986        |67.679     |1.048   |
+|200000000|834.93      |529.069    |1.578   |
+|2000000000|13295.718   |8012.440   |1.659   |
 
 ![alt text](docs/speedup-sieve.png)
 
@@ -110,10 +110,10 @@ Note: Time in in milliseconds
 #### Factorization:
 | n     | Sequential    | Parallel  | Speedup|
 |-------|---------------|-----------|--------|
-|2000000|7.807         |10.938     |0.713   |
-|20000000|36.994        |115.233     |0.321   |
-|200000000|234.110      |927.936    |0.252   |
-|2000000000|1036.304   |9401.941   |0.110   |
+|2000000|8.158         |14.262     |0.571   |
+|20000000|33.353        |62.52     |0.533   |
+|200000000|292.323      |523.201    |0.558   |
+|2000000000|981.110   |2230.00   |0.439   |
 
 
 ![alt text](docs/images/speedup-factorization.png)
@@ -122,10 +122,10 @@ Note: Time in in milliseconds
 #### Sieve + Factorization
 | n     | Sequential    | Parallel  | Speedup|
 |-------|---------------|-----------|--------|
-|2000000|22.691         |25.209     |0.900   |
-|20000000|182.282        |245.738     |0.741   |
-|200000000|1550.827      |1880.819    |0.824   |
-|2000000000|17005.628   |18030.864   |0.943   |
+|2000000|29.927         |49.893     |0.599   |
+|20000000|126.557        |125.974     |1.004   |
+|200000000|1103.679      |1063.148    |1.0381   |
+|2000000000|15830.695   |11203.972   |1.4129   |
 
 
 #### Discussion of the results
@@ -146,54 +146,55 @@ Paralleling the factorization however did not give a speedup for my algorithms. 
 
 ### 8. Appendix – the output of your program.
 Here is an example of output which outputs when running benchmark's: <br />
-Running benchmarks. This can take a while, please wait... <br />
-Starting benchmarking sieves... <br />
-Sequential Sieve used median time 9.1063ms for n = 2000000 <br />
-Parallel Sieve used median time 7.973ms for n = 2000000 <br />
-Speedup: 1.1421422300263389 <br />
-Sequential Sieve used median time 73.8185ms for n = 20000000 <br />
-Parallel Sieve used median time 65.9596ms for n = 20000000 <br />
-Speedup: 1.119147174937386 <br />
-Sequential Sieve used median time 969.9284ms for n = 200000000 <br />
-Parallel Sieve used median time 556.3265ms for n = 200000000 <br />
-Speedup: 1.74345173203146 <br />
-Sequential Sieve used median time 13854.7897ms for n = 2000000000 <br />
-Parallel Sieve used median time 11244.9455ms for n = 2000000000 <br />
-Speedup: 1.2320904267610724 <br />
-Finished benchmarking sieves... <br />
--------------------------------- <br />
-Starting benchmarking factorization... <br />
-Sequential Factorization used median time 7.9705ms for n = 2000000 <br />
-Paralell Factorization used median time 12.4736ms for n = 2000000 <br />
-Speedup: 0.6389895459209852 <br />
-Sequential Factorization used median time 33.9302ms for n = 20000000 <br />
-Paralell Factorization used median time 95.321ms for n = 20000000 <br />
-Speedup: 0.35595723922325617 <br />
-Sequential Factorization used median time 254.0066ms for n = 200000000 <br />
-Paralell Factorization used median time 1066.6903ms for n = 200000000 <br />
-Speedup: 0.23812591152277282 <br />
-Sequential Factorization used median time 1072.6763ms for n = 2000000000 <br />
-Paralell Factorization used median time 8425.6287ms for n = 2000000000 <br />
-Speedup: 0.12731112872324887 <br />
-Finished benchmarking factorization... <br />
--------------------------------- <br />
-Starting benchmarking sieve + factorization... <br />
-Sequential sieve + factorization used median time 17.9441ms for n = 2000000 <br />
-Parallel sieve + factorization used median time 21.7546ms for n = 2000000 <br />
-Speedup: 0.8248416426870638 <br />
-Sequential sieve + factorization used median time 121.1307ms for n = 20000000 <br />
-Parallel sieve + factorization used median time 178.5425ms for n = 20000000 <br />
-Speedup: 0.6784418275760674 <br />
-Sequential sieve + factorization used median time 1284.4311ms for n = 200000000 <br />
-Parallel sieve + factorization used median time 1590.0737ms for n = 200000000 <br />
-Speedup: 0.8077808594658223 <br />
-Sequential sieve + factorization used median time 14573.8955ms for n = 2000000000 <br />
-Parallel sieve + factorization used median time 19010.3113ms for n = 2000000000 <br />
-Speedup: 0.7666310808913476 <br />
-Finished benchmarking sieve + factorization <br />
--------------------------------- <br />
+Running benchmarks. This can take a while, please wait...<br />
+Starting benchmarking sieves...<br />
+Sequential Sieve used median time 7.872ms for n = 2000000<br />
+Parallel Sieve used median time 9.917ms for n = 2000000<br />
+Speedup: 0.7937884440859131<br />
+Sequential Sieve used median time 70.9863ms for n = 20000000<br />
+Parallel Sieve used median time 67.679ms for n = 20000000<br />
+Speedup: 1.04886744780508<br />
+Sequential Sieve used median time 834.9304ms for n = 200000000<br />
+Parallel Sieve used median time 529.0699ms for n = 200000000<br />
+Speedup: 1.5781098111988605<br />
+Sequential Sieve used median time 13295.7182ms for n = 2000000000<br />
+Parallel Sieve used median time 8012.4406ms for n = 2000000000<br />
+Speedup: 1.6593843079473187<br />
+Finished benchmarking sieves...<br />
+--------------------------------<br />
+Starting benchmarking factorization...<br />
+Sequential Factorization used median time 8.1583ms for n = 2000000<br />
+Paralell Factorization used median time 14.2629ms for n = 2000000<br />
+Speedup: 0.5719944751768574<br />
+Sequential Factorization used median time 33.3533ms for n = 20000000<br />
+Paralell Factorization used median time 62.5224ms for n = 20000000<br />
+Speedup: 0.5334616073599222<br />
+Sequential Factorization used median time 292.3231ms for n = 200000000<br />
+Paralell Factorization used median time 523.2015ms for n = 200000000<br />
+Speedup: 0.558719919572096<br />
+Sequential Factorization used median time 981.1106ms for n = 2000000000<br />
+Paralell Factorization used median time 2230.009ms for n = 2000000000<br />
+Speedup: 0.43995813469811107<br />
+Finished benchmarking factorization...<br />
+--------------------------------<br />
+Starting benchmarking sieve + factorization...<br />
+Sequential sieve + factorization used median time 29.927ms for n = 2000000<br />
+Parallel sieve + factorization used median time 49.8937ms for n = 2000000<br />
+Speedup: 0.5998152071303591<br />
+Sequential sieve + factorization used median time 126.557ms for n = 20000000<br />
+Parallel sieve + factorization used median time 125.9742ms for n = 20000000<br />
+Speedup: 1.0046263441244319<br />
+Sequential sieve + factorization used median time 1103.679ms for n = 200000000<br />
+Parallel sieve + factorization used median time 1063.1489ms for n = 200000000<br />
+Speedup: 1.0381226938202166<br />
+Sequential sieve + factorization used median time 15830.6955ms for n = 2000000000<br />
+Parallel sieve + factorization used median time 11203.9723ms for n = 2000000000<br />
+Speedup: 1.412953823529178<br />
+Finished benchmarking sieve + factorization<br />
+--------------------------------<br />
 <br />
-Process finished with exit code 0 <br />
+Process finished with exit code 0<br />
+
 
 
 ### Java measurement harness
@@ -213,41 +214,45 @@ The measurement begins with warming up in order to make sure that:
 It warms up once. After this, it runs 3 iterations of the benchmarks and collects the results of these runs. We can see the results as following for n=200_000_000:
 #### Sequential sieve + factorization
 ```
-Iteration   1: 1.271 s/op
-Iteration   2: 1.339 s/op
-Iteration   3: 1.252 s/op
+Iteration   1: 1.201 s/op
+Iteration   2: 1.161 s/op
+Iteration   3: 1.139 s/op
 
 
 Result "src.JbhBenchmarks.testSequential":
-  1.287 ±(99.9%) 0.832 s/op [Average]
-  (min, avg, max) = (1.252, 1.287, 1.339), stdev = 0.046
-  CI (99.9%): [0.455, 2.119] (assumes normal distribution)
+  1.167 ±(99.9%) 0.575 s/op [Average]
+  (min, avg, max) = (1.139, 1.167, 1.201), stdev = 0.032
+  CI (99.9%): [0.592, 1.742] (assumes normal distribution)
+
+
 
 ```
 #### Parallel sieve + factorization
 ```
-Iteration   1: 1.165 s/op
-Iteration   2: 1.185 s/op
-Iteration   3: 1.180 s/op
+Iteration   1: 0.928 s/op
+Iteration   2: 0.959 s/op
+Iteration   3: 0.948 s/op
 
 
 Result "src.JbhBenchmarks.testParallel":
-  1.177 ±(99.9%) 0.185 s/op [Average]
-  (min, avg, max) = (1.165, 1.177, 1.185), stdev = 0.010
-  CI (99.9%): [0.992, 1.362] (assumes normal distribution)
+  0.945 ±(99.9%) 0.284 s/op [Average]
+  (min, avg, max) = (0.928, 0.945, 0.959), stdev = 0.016
+  CI (99.9%): [0.661, 1.229] (assumes normal distribution)
+
 ```
 
 #### Comparison
 ```
 Benchmark                     Mode  Cnt  Score   Error  Units
-JbhBenchmarks.testParallel    avgt    3  1.177 ± 0.185   s/op
-JbhBenchmarks.testSequential  avgt    3  1.287 ± 0.832   s/op
+JbhBenchmarks.testParallel    avgt    3  0.945 ± 0.284   s/op
+JbhBenchmarks.testSequential  avgt    3  1.167 ± 0.575   s/op
+
 ```
-From the benchmarks we can see that we can run the sequential procedure around 1.287 per second the parallel procedure 1.177 per second.
-We can also see that we've achieved a speedup of around 1.10 by running it parallel. We concluded these results by seeing the time it took on average running a total of 3 runs for each
+From the benchmarks we can see that we can run the sequential procedure around 1.167 per second the parallel procedure 0.945 per second.
+We can also see that we've achieved a speedup of around 1.15 by running it parallel. We concluded these results by seeing the time it took on average running a total of 3 runs for each
 parallel and sequential. Due to the warmup, I believe the variance for each run is lower between each run. We can also see from the results that there is not much variance between each run. As there's
 not much variance, using the average time seems like a good fit. We could potentially run the methods more than 3 times, but for this benchmarking I thought it was sufficient. As a summary, the results can be used
-to argue that paralleling this procedue for such number n does improve the speed of the algorithm.
+to argue that paralleling this procedure for such number n does improve the speed of the algorithm.
 
 
 
