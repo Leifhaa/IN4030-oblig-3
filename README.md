@@ -72,7 +72,7 @@ it's important that we split so each thread doesn't start at the middle of a byt
 #### 1:
    ![alt text](docs/images/primes-distribution.png)
 
- The prime numbers were evenly distributed among the threads to each thread would be responsible for about the same amount of prime numbers to mark
+ The prime numbers were evenly distributed among the threads to each thread would be responsible for around the same amount of prime numbers to mark
 #### 2:
    ![alt text](docs/images/thread-responsiblity.png)
 
