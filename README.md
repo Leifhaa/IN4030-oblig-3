@@ -88,7 +88,7 @@ The main method should be used for launching the program. See 2. (User guide) on
 1. Runs sequentially where it's using the precode for the sieve. Then it factorizes using the sequentially code which I created.
 2. Runs parallel. In this process, It's using the parallel sieve which I've built to obtain the prime numbers. After this, it uses the result of the prime numbers to factorize in parallel.
 3. Runs benchmarks. In this process, it's taking every individual process (sequential sieve, sequential factorization, parallel sieve, parallel factorization) and measures the time for each of these. It also displays the speedsup achieved. It calculates the median runtime of total 7 runs.
-4. Runs tests. In this case it's doing the whole procedure of factorizing sequential and factorizing in parallel. After completed, it compares the outout of the results for each sequential & parallel and ensures these are the time.
+4. Runs tests. In this case it's doing the whole procedure of factorizing sequential and factorizing in parallel. After completed, it compares the outout of the results for each sequential & parallel and ensures these are equal.
 
 
 
