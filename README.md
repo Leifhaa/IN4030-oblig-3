@@ -54,71 +54,129 @@ it's important that we split so each thread doesn't start at the middle of a byt
 3. Now that we've marked all numbers from 0-n, we have a bitarray of marked numbers (numbers which is not prime numbers). All we have to do at the end is sequentially convert this bitarray to an array of integer with prime numbers from 0-n
 
 
+### 4. Parallel factorization of a large number – how you did the parallelization – consider including drawings
+1. Before starting this process, it's important to know the prime numbers which was generated using the sieve.
+   ![alt text](docs/images/primes-distribution.png)
+2. The prime numbers were evenly distributed among the threads to each thread would be responsible for about the same amount of prime numbers to mark
+   ![alt text](docs/images/thread-responsiblity.png)
+3. In each thread, the thread would check it's assigned primes and add these to a an array if it's a factor in n.
+   ![alt text](docs/images/factorization-process.png)
+4. After all threads were finished, they had a local array of factors which they would. The last thing we have to do is to merge these arrays and add the remainder if there is any. Then we have the complete factorization and are finished.
+
+
+### 5. Implementation – a somewhat detailed description of how your Java program works & how tested.
+The main method should be used for launching the program. See 2. (User guide) on how to launch it. Based on the input the program either:
+1. Runs sequentially where it's using the precode for the sieve. Then it factorizes using the sequentially code which I created.
+2. Runs parallel. In this process, It's using the parallel sieve which I've built to obtain the prime numbers. After this, it uses the result of the prime numbers to factorize in parallel.
+3. Runs benchmarks. In this process, it's taking every individual process (sequential sieve, sequential factorization, parallel sieve, parallel factorization) and measures the time for each of these. It also displays the speedsup achieved. It calculates the median runtime of total 7 runs.
+4. Runs tests. In this case it's doing the whole procedure of factorizing sequential and factorizing in parallel. After completed, it compares the outout of the results for each sequential & parallel and ensures these are the time.
 
 
 
+### 6. Measurements – includes discussion, tables, graphs of speedups for the four values of N, number of cores used.
+Note: Time in in milliseconds
+#### Cores used: 8
+
+#### Sieve:
+| n     | Sequential    | Parallel  | Speedup|
+|-------|---------------|-----------|--------|
+|2000000|7.9108         |7.4203     |1.066   |
+|20000000|76.587        |68.110     |1.124   |
+|200000000|903.154      |553.767    |1.630   |
+|2000000000|13447.481   |7862.125   |1.710   |
+
+Chart:
+![alt text](docs/speedup-sieve.png)
+
+
+#### Factorization:
+| n     | Sequential    | Parallel  | Speedup|
+|-------|---------------|-----------|--------|
+|2000000|7.807         |10.938     |0.713   |
+|20000000|36.994        |115.233     |0.321   |
+|200000000|234.110      |927.936    |0.252   |
+|2000000000|1036.304   |9401.941   |0.110   |
+
+
+Chart:
+![alt text](docs/images/speedup-factorization.png)
+
+
+#### Sieve + Factorization
+| n     | Sequential    | Parallel  | Speedup|
+|-------|---------------|-----------|--------|
+|2000000|22.691         |25.209     |0.900   |
+|20000000|182.282        |245.738     |0.741   |
+|200000000|1550.827      |1880.819    |0.824   |
+|2000000000|17005.628   |18030.864   |0.943   |
+
+
+#### Discussion of the results
+From the results we can first see that paralleling the sieve seems to give a speedup. Once n increases, the efficiency of multithreading the program is also increasing. At 2 billion, we have a speedup for around 1.7 which means that the
+algorithm almost runs twice the speed due to running multithreaded. For smaller numbers however, it's not giving large speedsup. For e.g 2000000 we see that we only achieve speedup of 1.066.
+We can also see that the parallel sieve does complete at 9401.941 which is below the requirement of the sieve completing in 30 seconds.
+
+Over to the factorization part, we can see that the speedup actually decreases as n becomes larger. I was expecting the speedup to also increase as n increased for this algorithm, however the opposite occurred. I believe this occurs as
+the sequential algorithm performs quite fast (1036.304 for 2 billion) and is able to break earlier if it recognizes that it's completed. For the parallel algorithm however, it's not able to do the same which influences that it's slower as n increases.
+It is however able to complete in around 9.4 seconds, or a total of 18030.864 for parallel sieve + parallel factorization which is below the requirement of 60 seconds. Due to this, I don't believe there's an bug in the algorithm, but simply that the sequential algorithm has internal code where it's able to conclude that it's finished earlier (only possible when running sequential)
+
+
+### 7. Conclusion – just a short summary of what you have achieved
+We can see that parallelling the sieve does give a speedup, especially once n becomes larger.
+Paralleling the factorization however did not give a speedup for my algorithms. As a result, the algorithms performs at about the same rate. Sequential factorization is faster in my tests and parallel is faster in my tests.
 
 
 
+### 8. Appendix – the output of your program.
+Here is an example of output which outputs when running benchmark's:
+Running benchmarks. This can take a while, please wait...
+Starting benchmarking sieves...
+Sequential Sieve used median time 9.1063ms for n = 2000000
+Parallel Sieve used median time 7.973ms for n = 2000000
+Speedup: 1.1421422300263389
+Sequential Sieve used median time 73.8185ms for n = 20000000
+Parallel Sieve used median time 65.9596ms for n = 20000000
+Speedup: 1.119147174937386
+Sequential Sieve used median time 969.9284ms for n = 200000000
+Parallel Sieve used median time 556.3265ms for n = 200000000
+Speedup: 1.74345173203146
+Sequential Sieve used median time 13854.7897ms for n = 2000000000
+Parallel Sieve used median time 11244.9455ms for n = 2000000000
+Speedup: 1.2320904267610724
+Finished benchmarking sieves...
+--------------------------------
+Starting benchmarking factorization...
+Sequential Factorization used median time 7.9705ms for n = 2000000
+Paralell Factorization used median time 12.4736ms for n = 2000000
+Speedup: 0.6389895459209852
+Sequential Factorization used median time 33.9302ms for n = 20000000
+Paralell Factorization used median time 95.321ms for n = 20000000
+Speedup: 0.35595723922325617
+Sequential Factorization used median time 254.0066ms for n = 200000000
+Paralell Factorization used median time 1066.6903ms for n = 200000000
+Speedup: 0.23812591152277282
+Sequential Factorization used median time 1072.6763ms for n = 2000000000
+Paralell Factorization used median time 8425.6287ms for n = 2000000000
+Speedup: 0.12731112872324887
+Finished benchmarking factorization...
+--------------------------------
+Starting benchmarking sieve + factorization...
+Sequential sieve + factorization used median time 17.9441ms for n = 2000000
+Parallel sieve + factorization used median time 21.7546ms for n = 2000000
+Speedup: 0.8248416426870638
+Sequential sieve + factorization used median time 121.1307ms for n = 20000000
+Parallel sieve + factorization used median time 178.5425ms for n = 20000000
+Speedup: 0.6784418275760674
+Sequential sieve + factorization used median time 1284.4311ms for n = 200000000
+Parallel sieve + factorization used median time 1590.0737ms for n = 200000000
+Speedup: 0.8077808594658223
+Sequential sieve + factorization used median time 14573.8955ms for n = 2000000000
+Parallel sieve + factorization used median time 19010.3113ms for n = 2000000000
+Speedup: 0.7666310808913476
+Finished benchmarking sieve + factorization
+--------------------------------
 
-
-
-###Prime number
-A prime number is a whole number which is only dividable by itself and 1
-
-####Finding prime numbers using Sieve of Eratosthenes?
-Given the numbers 1-17
-- We ignore 1 (x)
-- Second number is 2, we underline it. It's a prime
-- Then we jump by 2, cross that out, jump by 2, cross that out, jump by 2, cross that out... (2,4,6,8,10,12,14,16 are crossed out)
-- Then we go to next number which has not been crossed out (3). That's a prime number and cross out every jump by 3 (6, 9, 12, 15 crossed out if not already)
-- Then we go to next number which is not crossed out, (5) which is a prime number and cross out every jump by 5 (10, 15 if not crossed out already)
-- Then we go to 7, but 7  is greater than of the maximum number now (17). It means that the remaining numbers which are not crossed out, is primes (11, 13, 17)
-- We should also remove the even numbers before starting this process (besides 2).
-- We can do the stepping by starting looking at numbers from p*p (e.g for 3 we start at 9, or for 7 we start at 49)
-- If we're stepping forward with 3 we hit an odd number each 2 time (3, 6(odd), 9, 12(odd)) so we can skip jump by 6 all the time (2*p)
-
-###Factorization
-Any number higher than 1 is possible to factorise as a product of prime numbers
-N = p1 * p2 * p3 * px.
-E.g 4 = 2*2 (2 is a prime number)
-E.g 6 = 3*2 (3 and 2 is prime number)
-If you ignore the order of the factorised numbers, there's only one possible combination (so 6 can be factorised as 3*2 or 2*3 but if you ignore the order they are the same). In this submission we order them from highest to lowest
-If there's only one number in this factorization, the number itself is a prime number.
-
-####Finding factorization number
-If we wanna factorize e.g 532 the way we do is:
-- Start taking numbers from the sieve, starting with 2
-- Try divide that into 532: 532/2 = 266. So current factorization is 2
-- Then we retry to divide it by the number again: 266/2 = 133. Current factorization is 2*2
-- Then we try again 133/2 which doesnt work.
-- So we step to the next number in the sieve (3) and check that it's not greater than the square root of by multiple 3*3 (9) and checking that its not higher than 
-- 3 is also not dividable, so we go to next number in sieve (5), not dividable by 133.
-- So we go to next number (7). It's dividable by 7! So we end up with 19 and the factorisation 2 * 2 * 7.
-- Then we try 7 again and check if it divides by 17. But before this, we have to check if we should keep trying:
-- We should stop trying whenever the candidate is greater than the square root of the number we're working on (square root of 19 is less than 5. And 7 is greater than this so we should stop trying)
-- So we have reached out stop condition. If there is a number left (19 in this case) we know it's a prime number and therfore also a factor.
-- So the factorization is now 2*2*7*19.
-
-
-####Approach for programming the sieve
-- The sieve could be an array of boolean which represents if a number is crossed out or not.
-- The issue is that each boolean will take 32 bits, so using a 1 billion large sieve would require 32 billion bits when we only need 1
-single bit for each entry in the sieve.
-- We need to optimize this. We only need 1 bit as a flag if a number is crossed out or not
-- Instead we use a array of bytes where each bit position indicates wether the number has been crossed out or not. So if a number is crossed out, we simply set that bit to 1.
-- This requires some administration. We have special case where we start at the number 3. We also skip every second bit
-- If we want to find the bit number, So we have the calculation (nr - 3) / 2. We can also reverse this and see which value a particular bit's value is.
-- So e.g 3 is (3-3)/2 = bit position 0. 5 is (5-3)/2 = bit position 1. 7 is (7-3)/2 = bit position 2
-- If we want to find the byte number we do bo: math.floor(bitnumber/8). Remember to round down. 
-- For finding the bit number within the byte number which we found, we retrieve the remainder from the math.floor when finding byte number, and this remainder is the bit number within the particular byte which we found.
-- Using & and | operations is useful for manipulating these bits.
-- Parts of this code is already in the precode.
-
-
-### Synchronization of the sieve
-When paralleling the sieve, having too many synchronizations can be expensive.
-
+Process finished with exit code 0
 
 
 ### Java measurement harness
@@ -181,9 +239,41 @@ The benchmarks are set to report the average time usage
 
 
 
+## How does factorizationa nd Sieve of Sieve of Eratosthenes work? (Not neccesairy to read for examiner)
+###Prime number
+A prime number is a whole number which is only dividable by itself and 1
 
-### Todo:
-document that we're making it more efficient by:
+####Finding prime numbers using Sieve of Eratosthenes?
+Given the numbers 1-17
+- We ignore 1 (x)
+- Second number is 2, we underline it. It's a prime
+- Then we jump by 2, cross that out, jump by 2, cross that out, jump by 2, cross that out... (2,4,6,8,10,12,14,16 are crossed out)
+- Then we go to next number which has not been crossed out (3). That's a prime number and cross out every jump by 3 (6, 9, 12, 15 crossed out if not already)
+- Then we go to next number which is not crossed out, (5) which is a prime number and cross out every jump by 5 (10, 15 if not crossed out already)
+- Then we go to 7, but 7  is greater than of the maximum number now (17). It means that the remaining numbers which are not crossed out, is primes (11, 13, 17)
+- We should also remove the even numbers before starting this process (besides 2).
+- We can do the stepping by starting looking at numbers from p*p (e.g for 3 we start at 9, or for 7 we start at 49)
+- If we're stepping forward with 3 we hit an odd number each 2 time (3, 6(odd), 9, 12(odd)) so we can skip jump by 6 all the time (2*p)
 
+###Factorization
+Any number higher than 1 is possible to factorise as a product of prime numbers
+N = p1 * p2 * p3 * px.
+E.g 4 = 2*2 (2 is a prime number)
+E.g 6 = 3*2 (3 and 2 is prime number)
+If you ignore the order of the factorised numbers, there's only one possible combination (so 6 can be factorised as 3*2 or 2*3 but if you ignore the order they are the same). In this submission we order them from highest to lowest
+If there's only one number in this factorization, the number itself is a prime number.
 
+####Finding factorization number
+If we wanna factorize e.g 532 the way we do is:
+- Start taking numbers from the sieve, starting with 2
+- Try divide that into 532: 532/2 = 266. So current factorization is 2
+- Then we retry to divide it by the number again: 266/2 = 133. Current factorization is 2*2
+- Then we try again 133/2 which doesnt work.
+- So we step to the next number in the sieve (3) and check that it's not greater than the square root of by multiple 3*3 (9) and checking that its not higher than
+- 3 is also not dividable, so we go to next number in sieve (5), not dividable by 133.
+- So we go to next number (7). It's dividable by 7! So we end up with 19 and the factorisation 2 * 2 * 7.
+- Then we try 7 again and check if it divides by 17. But before this, we have to check if we should keep trying:
+- We should stop trying whenever the candidate is greater than the square root of the number we're working on (square root of 19 is less than 5. And 7 is greater than this so we should stop trying)
+- So we have reached out stop condition. If there is a number left (19 in this case) we know it's a prime number and therfore also a factor.
+- So the factorization is now 2*2*7*19.
 
