@@ -8,7 +8,7 @@ The program can be run using the command:
 ```
 java -cp target/IN4030-oblig-3-1.0-SNAPSHOT.jar src.Main <n> <t> <m>
 ```
-- n - Program will generate all primes up to up and factorize the 100 largest numbers less than n*n
+- n - Program will generate all primes up to n and factorize the 100 largest numbers less than n*n
 - t - How many threads to use. if zero then the program uses the number of cores on the machine
 - m - Which mode to use. Can be the following:
     - 0: runs the program sequentially
