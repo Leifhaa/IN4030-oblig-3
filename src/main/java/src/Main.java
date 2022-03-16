@@ -49,8 +49,8 @@ public class Main {
             return;
         }
 
-        if (mode < 0 || mode > 2) {
-            System.out.println("Third argument has to be between 0 and 2");
+        if (mode < 0 || mode > 3) {
+            System.out.println("Third argument has to be between 0 and 3");
             printInstructions();
             return;
         }
@@ -104,13 +104,44 @@ public class Main {
             speedTestSieves(testNumber, threads);
         }
         System.out.println("Finished benchmarking sieves...");
+        System.out.println("--------------------------------");
+
 
         System.out.println("Starting benchmarking factorization...");
         for (int testNumber : testNumbers) {
             speedTestFactorization(testNumber, threads);
         }
         System.out.println("Finished benchmarking factorization...");
+        System.out.println("--------------------------------");
 
+        for (int testNumber : testNumbers) {
+            speedTestWholeProcedures(testNumber, threads);
+        }
+
+    }
+
+    private static void speedTestWholeProcedures(int testNumber, int threads) {
+        int totalRuns = 7;
+        double[] seqTimes = new double[totalRuns];
+        for (int i = 0; i < totalRuns; i++) {
+            long time = System.nanoTime();
+            int[] sieve = runSequentialSieve(testNumber);
+            runSequentialFactorization(testNumber, sieve);
+            seqTimes[i] = (System.nanoTime() - time) / 1000000.0;
+        }
+        double seqMedian = seqTimes[(seqTimes.length) / 2];
+        System.out.println("Sequential used median time " + seqMedian + " for n = " + testNumber);
+
+        double[] paraTimes = new double[totalRuns];
+        for (int i = 0; i < totalRuns; i++) {
+            long time = System.nanoTime();
+            int[] sieve = runParallelSievve(testNumber, threads);
+            runParallelFactorization(testNumber, threads, sieve);
+            paraTimes[i] = (System.nanoTime() - time) / 1000000.0;
+        }
+
+        double paraMedian = paraTimes[(paraTimes.length) / 2];
+        System.out.println("Parallel used median time " + paraMedian + " for n = " + testNumber);
     }
 
     private static void speedTestFactorization(int testNumber, int threads) {
@@ -169,6 +200,6 @@ public class Main {
                 "      \"java main <n> <t> <m> where:" +
                 "<n> is the number which should be factorized \n" +
                 "<t> is number of threads to use (0 means use all computer's cores) \n" +
-                "<m> an positive integer from 0-2. 0 means run in sequential. 1 Means run in paralell. 2 means run benchmarks");
+                "<m> an positive integer from 0-3. 0 means run in sequential. 1 Means run in parallel. 2 means run benchmarks, 3 means run test");
     }
 }
