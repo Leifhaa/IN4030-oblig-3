@@ -76,7 +76,7 @@ it's important that we split so each thread doesn't start at the middle of a byt
 #### 2:
    ![alt text](docs/images/thread-responsiblity.png)
 
- In each thread, the thread would check it's assigned primes and add these to a an array if it's a factor in n.
+ In each thread, it iterates the assigned primes and check if the prime number is a factor in n. If yes, it will add this prime to an array, otherwise it will continue searching.
 #### 3:
    ![alt text](docs/images/factorization-process.png)
 
