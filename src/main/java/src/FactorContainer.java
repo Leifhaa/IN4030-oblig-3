@@ -53,7 +53,7 @@ public class FactorContainer {
                 }
             }
 
-            if (total != number.getKey()) {
+            if (total != number.getKey() && total != 0) {
                 oblig3Precode.addFactor(number.getKey(), number.getKey() / total);
             }
         }
