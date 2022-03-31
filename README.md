@@ -144,8 +144,8 @@ For the whole procedure of sieve + factorization, we see that the sequential alg
 
 ### 7. Conclusion – just a short summary of what you have achieved
 We can see that parallelling the sieve does give a speedup, especially once n becomes larger.
-Paralleling the factorization however did not give a speedup for my algorithms. This is likely the result of that the sequential factorization was fast and the parallel factorization had much overhead & synchronization.
-In total however, when adding the sieve and the factorization, we see that parallelization is beneficial when n is 20000000 or more.
+We also see that this occurs in parallelling the factorization. As n becomes larger, the efficiency increases. Multithreading enables us to run the factorization faster once there's large numbers.
+In total, when adding the sieve and the factorization, we see that parallelization is beneficial when n is 20000000 or more. Lower numbers are faster running in sequence which is likely due to the overhead of creating threads, synchronization of threads etc in the parallel solution.
 
 
 
