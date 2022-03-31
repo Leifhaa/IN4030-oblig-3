@@ -129,13 +129,13 @@ Note: Time in in milliseconds
 
 
 #### Discussion of the results
-From the results we can first see that paralleling the sieve seems to give a speedup. Once n increases, the efficiency of multithreading the program is also increasing. At 2 billion, we have a speedup for around 1.659 which means that the
-algorithm is almost runs at twice the speed due to running multithreaded. For smaller numbers however, it's not giving large speedsup. For e.g 20000000 we see that we only achieve speedup of 1.048 and when n is even lower, then parallelization is slower likely due to overhead of starting threads etc.
-We can also see that the parallel sieve does complete at 8012.440 which is below the requirement of the sieve completing in 30 seconds.
+From the results we can first see that paralleling the sieve seems to give a speedup. Once n increases, the efficiency of multithreading the program is also increasing. At 2 billion, we have a speedup for around 1.856 which means that the
+algorithm is almost runs at twice the speed due to running multithreaded. For smaller numbers however, it's not giving large speedsup. For e.g 20000000 we see that we only achieve speedup of 0.870 and when n is even lower, then parallelization is slower likely due to overhead of starting threads etc.
+We can also see that the parallel sieve does complete at 7223.361 which is below the requirement of the sieve completing in 30 seconds.
 
-Over to the factorization part, we can see that the speedup is around the same (0.5) or even decreases as n becomes larger. I was expecting the speedup to also increase as n increased for this algorithm, however the opposite occurred. I believe this occurs as
-the sequential algorithm performs quite fast (981.110 for 2 billion) and does not require either synchronization or startup of threads. For the parallel algorithm however, this is required which causes it to use some more time.
-It is however able to complete in around 2.2 seconds which is also quite fast.
+Over to the factorization part, we can see that the speedup begins with around 0.102 which implies that for low numbers, paralleling does not increase the speed. The trend shows that as N does become larger, the efficiency of paralleling increases. When is n is 200000000 or larger, we achieve a speedup greater than 1. For even greater n numbers, we see that the effect of parallelization is even higher (2000000000 has speedup of 3.024).
+We see that having multiple threads which each factorizes subset of the prime numbers does drastically increase the efficiency for high numbers. For low numbers however, having a sequential solution is faster likely due to the overhead of synchronization's and creating/starting threads.
+
 
 For the whole procedure of sieve + factorization, we see that the sequential algorithm is faster for lower numbers likely due to not having to create threads, synchronize etc. As n increases however, the overhead turns out to be less significant and parallelize runs faster than sequential. I'd expect this speedup to increase more if we're increasing n to a higher number.
 
