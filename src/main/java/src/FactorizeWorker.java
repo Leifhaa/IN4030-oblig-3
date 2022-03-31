@@ -29,16 +29,13 @@ public class FactorizeWorker implements Runnable {
     }
 
     private void factorize(long number){
-        for (int i = id; i < primes.length || factorContainer.rests.get(number) == 0;){
-            if (Math.pow(primes[i], 2) > factorContainer.rests.get(number)){
+        for (int i = id; i < primes.length; i += threadCount){
+            if (primes[i] > factorContainer.tmpRoots.get(number)){
                 //Completed
                 break;
             }
-            else if (factorContainer.rests.get(number) % primes[i] == 0){
+            while (factorContainer.rests.get(number) % primes[i] == 0){
                 factorContainer.addFactor(number, id, primes[i]);
-            }
-            else{
-                i += threadCount;
             }
         }
     }

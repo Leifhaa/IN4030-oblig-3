@@ -11,6 +11,7 @@ import java.util.Map;
 public class FactorContainer {
     private HashMap<Long, HashMap<Integer, ArrayList<Integer>>> factorMap;
     public HashMap<Long, Long> rests = new HashMap<>();
+    public HashMap<Long, Long> tmpRoots = new HashMap<>();
     private int workers;
 
 
@@ -20,6 +21,7 @@ public class FactorContainer {
         for (long i = readTo - 1; i >= readFrom; i--) {
             factorMap.put(i, new HashMap<>());
             rests.put(i, i);
+            tmpRoots.put(i, (long)Math.sqrt(i));
             for (int j = 0; j < workers; j++) {
                 registerWorker(i, j);
             }
@@ -34,7 +36,13 @@ public class FactorContainer {
     public synchronized void addFactor(long number, int workerId, int prime) {
         HashMap<Integer, ArrayList<Integer>> map = factorMap.get(number);
         map.get(workerId).add(prime);
-        rests.put(number, rests.get(number) / prime);
+
+        //Update the 'rest' number
+        long newRest = rests.get(number) / prime;
+        rests.put(number, newRest);
+
+        //Update the square root for the current number
+        tmpRoots.put(number, (long)Math.sqrt(newRest));
     }
 
     public void saveResults(int n) {
