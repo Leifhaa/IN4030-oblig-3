@@ -13,35 +13,40 @@ public class ParallelFactorization {
 
     public ParallelFactorization(int n, int threadCount, int[] primes) {
         this.n = n;
-        this.base = (long)n * n;
+        this.base = (long) n * n;
         this.threadCount = threadCount;
         this.primes = primes;
-        this.factorContainer = new FactorContainer(base - nFactorizations, base, threadCount);
+        this.factorContainer = new FactorContainer(threadCount, n);
     }
 
 
     public void factorizeAll() {
-        createThreads();
-        startThreads();
-        for (int i = 0; i < threadCount; i++) {
-            try {
-                threads[i].join();
-            } catch (Exception e) {
-                System.out.println("Exception : " + e);
+        long readFrom = base - 100;
+        for (long number = readFrom; number < base; number++) {
+            factorContainer.setNumber(number);
+            createThreads(number);
+            startThreads();
+            for (int i = 0; i < threadCount; i++) {
+                try {
+                    threads[i].join();
+                } catch (Exception e) {
+                    System.out.println("Exception : " + e);
+                }
             }
+            factorContainer.reset(number);
         }
-        factorContainer.saveResults(n);
+        factorContainer.saveResults();
     }
 
 
     /**
      * Creates all worker threads which should factorize
      */
-    private void createThreads() {
+    private void createThreads(long base) {
         workers = new FactorizeWorker[threadCount];
         threads = new Thread[threadCount];
         for (int i = 0; i < threadCount; i++) {
-            createThread(i);
+            createThread(i, base);
         }
     }
 
@@ -52,11 +57,10 @@ public class ParallelFactorization {
     }
 
 
-    private void createThread(int i) {
-        FactorizeWorker worker = new FactorizeWorker(i, base, threadCount, primes, factorContainer, nFactorizations);
+    private void createThread(int i, long base) {
+        FactorizeWorker worker = new FactorizeWorker(i, base, threadCount, primes, factorContainer);
         workers[i] = worker;
         Thread t = new Thread(worker);
         threads[i] = t;
     }
-
 }

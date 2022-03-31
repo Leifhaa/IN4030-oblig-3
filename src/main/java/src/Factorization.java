@@ -24,19 +24,20 @@ public class Factorization {
 
     private void factorize(long number){
         long rest = number;
-        for (int i = 0; i < primes.length || rest == 0;){
-            if (Math.pow(primes[i], 2) > rest){
-                precode.addFactor(number, rest);
-                //Completed
+        long root = (long) Math.sqrt(number);
+        for (int i = 0; i < primes.length || rest == 0; i++){
+            if (primes[i] > root){
                 break;
             }
-            else if (rest % primes[i] == 0){
+            while (rest % primes[i] == 0){
                 precode.addFactor(number, primes[i]);
                 rest = rest / primes[i];
+                root = (long)Math.sqrt(rest);
             }
-            else{
-                i++;
-            }
+        }
+
+        if (rest > 1){
+            precode.addFactor(number, rest);
         }
     }
 }

@@ -107,19 +107,16 @@ public class Main {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    //Skip first line
-                    outPut = outPut.substring(outPut.length());
                     results.add(outPut);
                 }
             }
 
             //Ensure results for all algorithms are equal
-            for (int i = 0; i < results.size(); i++){
-                for (int j = i + 1; j < results.size(); j++){
-                    if (!results.get(i).equals(results.get(j))){
-                        System.out.println("Sequential and parallel solution does not produce same out!");
-                        return;
-                    }
+            int j = 1;
+            for (int i = 0; j < results.size(); i = i + 2, j = j + 2) {
+                if (!results.get(i).equals(results.get(j))) {
+                    System.out.println("Sequential and parallel solution does not produce same out!");
+                    return;
                 }
             }
         }
